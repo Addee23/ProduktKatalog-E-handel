@@ -1,0 +1,151 @@
+/* =======================
+   Globala färger (dina)
+   ======================= */
+:root {
+    --primary-color: #60a5fa; /* ljus blå/lila */
+    --primary-hover: #2563eb; /* mörkare vid hover */
+    --dark-bg: #212529; /* navbar/footer */
+}
+
+/* ========= Layout (sticky footer) ========= */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* minst hela skärmen */
+}
+
+main {
+    flex: 1; /* tar upp allt mellan header och footer */
+}
+
+footer {
+    margin-top: auto; /* pressas ner i botten */
+    flex-shrink: 0; /* hindrar footern från att flyta upp */
+}
+
+/* ========= Navbar ========= */
+.navbar {
+    background-color: var(--dark-bg) !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+    .navbar .nav-link,
+    .navbar-brand {
+        color: #fff !important;
+    }
+
+    .navbar .btn {
+        padding: 5px 14px;
+        margin-left: 5px;
+    }
+
+/* ========= Knappar ========= */
+/* Primärknapp (Registrera m.m.) */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+}
+
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+    }
+
+/* Outline-knapp (Logga in) */
+.btn-outline-light {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-weight: 600;
+}
+
+    .btn-outline-light:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+    }
+
+/* ========= Badges / kategoriband ========= */
+.badge,
+.card .badge {
+    background-color: var(--primary-color) !important;
+    color: #fff !important;
+}
+
+/* Varukorgsbadge (den lilla röda siffran styrs i markup) – låt den vara överlagrad */
+.position-absolute.badge {
+    color: #fff !important;
+}
+
+/* ========= Footer ========= */
+.footer,
+.footer a {
+    color: #fff !important; /* vit text i fotern */
+    letter-spacing: 0.3px;
+    font-size: 0.95rem;
+}
+
+/* ========= Kort ========= */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+    .card:hover {
+        transform: translateY(-3px);
+    }
+
+/* ========= Fokusring ========= */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* ========= Footer fix ========= */
+html, body {
+    height: 100% !important;
+    margin: 0 !important;
+}
+
+body {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}
+
+main {
+    flex: 1 0 auto !important;
+}
+
+
+/* Ny enkel footer */
+.custom-footer {
+    width: 100%;
+    background-color: #212529; /* samma som navbar */
+    color: #fff;
+    position: relative; /* normal, följer sidan */
+    bottom: 0;
+    left: 0;
+}
+
+    .custom-footer a {
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+        .custom-footer a:hover {
+            color: var(--primary-color); /* din blå/lila highlight */
+        }
+
+
+
+

@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - 🍪 ProduktKatalog</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/ProduktKatalog.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark box-shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">🍪</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="mainNav" class="collapse navbar-collapse">
+                    <!-- Vänster meny -->
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Start</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Integritetspolicy</a>
+                        </li>
+                    </ul>
+
+                    <!-- Höger: Hej/Logga in/Registrera + Varukorg + ev. Admin -->
+                    <ul class="navbar-nav ms-auto align-items-center">
+
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link text-white">Hej @User.Identity!.Name!</span>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-area="Identity" asp-page="/Account/Logout" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-light">Logga ut</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item me-2">
+                                <a class="btn btn-sm btn-outline-light" asp-area="Identity" asp-page="/Account/Login">🔑 Logga in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-sm btn-primary" asp-area="Identity" asp-page="/Account/Register">➕ Registrera</a>
+                            </li>
+                        }
+
+                        <li class="nav-item ms-2">
+                            <!-- Varukorg -->
+                            <a class="nav-link position-relative" asp-controller="Cart" asp-action="Index" title="Varukorg">
+                                <i class="bi bi-cart text-white fs-3"></i>
+                                <span class="position-absolute badge rounded-pill bg-danger text-white" style="top:-6px; right:-6px;">
+                                    @await Component.InvokeAsync("CartSummary")
+                                </span>
+                            </a>
+                        </li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item ms-2">
+                                <a class="nav-link text-warning fw-bold" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+        <!-- Main content -->
+    <main role="main" class="pb-3">
+
+            <div class="container">
+                @RenderBody()
+            </div>
+        </main>
+
+        <!-- Footer -->
+    <footer class="custom-footer bg-dark text-white text-center py-3">
+        <div class="container">
+            &copy; @DateTime.Now.Year - ProduktKatalog |
+            <a class="text-white text-decoration-underline" asp-area="" asp-controller="Home" asp-action="Privacy">
+                Integritetspolicy
+            </a>
+        </div>
+
+        <!-- Sociala medier -->
+        <div class="mt-2">
+            <a href="https://facebook.com" target="_blank" class="text-white me-3">
+                <i class="bi bi-facebook fs-4"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="text-white me-3">
+                <i class="bi bi-twitter-x fs-4"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="text-white me-3">
+                <i class="bi bi-instagram fs-4"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="text-white">
+                <i class="bi bi-linkedin fs-4"></i>
+            </a>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿@model List<ProduktKatalog.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Varukorg";
+}
+
+<h2>🛒 Din varukorg</h2>
+
+@if (Model.Count == 0)
+{
+    <p>Din varukorg är tom.</p>
+    <a asp-controller="Products" asp-action="Index" class="btn btn-secondary">⬅ Tillbaka till produkter</a>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produkt</th>
+                <th>Pris</th>
+                <th>Antal</th>
+                <th>Summa</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price kr</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <a asp-controller="Cart" asp-action="DecreaseQuantity" asp-route-id="@item.ProductId"
+                               class="btn btn-sm btn-outline-danger me-2">-</a>
+
+                            <span>@item.Quantity</span>
+
+                            <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.ProductId"
+                               class="btn btn-sm btn-outline-success ms-2">+</a>
+                        </div>
+                    </td>
+                    <td>@(item.Price* item.Quantity) kr</td>
+                    <td>
+                        <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.ProductId"
+                           class="btn btn-sm btn-danger">Ta bort</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>
+        Totalt: <strong>@Model.Sum(x => x.Price * x.Quantity) kr</strong>
+    </h4>
+
+    <a asp-controller="Products" asp-action="Index" class="btn btn-primary">Tillbaka till produkter</a>
+
+    <a asp-controller="Cart" asp-action="ClearCart" class="btn btn-danger ms-2">Töm varukorg</a>
+}

@@ -1,0 +1,17 @@
+﻿# Ignorera Visual Studio-filer
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.tmp
+*.log
+*.dbmdl
+*.cache
+*.config
+*.dll
+*.pdb
+*.exe
+/packages/
+/TestResults/
+*.local

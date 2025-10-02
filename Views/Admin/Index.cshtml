@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            <h2>Admin Panel</h2>
+        </div>
+        <div class="card-body">
+            <p>Välkommen <strong>@User.Identity.Name</strong> – du är inloggad som admin.</p>
+
+            <div class="list-group">
+                <a asp-controller="Products" asp-action="Index" class="list-group-item list-group-item-action">
+                    📦 Hantera produkter
+                </a>
+                <a asp-controller="Orders" asp-action="Index" class="list-group-item list-group-item-action">
+                    🛒 Hantera beställningar
+                </a>
+                <a asp-controller="Users" asp-action="Index" class="list-group-item list-group-item-action">
+                    👥 Hantera användare
+                </a>
+
+                <a asp-controller="Products" asp-action="Index" class="btn btn-primary mt-3">
+                    Tillbaka till produkter
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
